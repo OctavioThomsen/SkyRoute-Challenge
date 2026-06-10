@@ -1,0 +1,112 @@
+.booking {
+  padding: var(--space-xxl) 0 var(--space-section);
+}
+
+.booking__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.booking__header .badge-coral {
+  align-self: flex-start;
+}
+
+.booking__lede {
+  color: var(--color-muted);
+}
+
+.booking__layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.booking__error {
+  background-color: rgba(198, 69, 69, 0.1);
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+  border-radius: var(--rounded-md);
+  padding: var(--space-md);
+  font-size: 14px;
+  margin-bottom: var(--space-lg);
+}
+
+.booking__card {
+  background-color: var(--color-surface-card);
+  border-radius: var(--rounded-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.booking__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking__hint {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-top: var(--space-xxs);
+}
+
+.booking__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.booking__summary-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.booking__breakdown {
+  background-color: var(--color-surface-dark);
+  color: var(--color-on-dark);
+  border-radius: var(--rounded-lg);
+  padding: var(--space-xl);
+}
+
+.booking__breakdown-title {
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-md);
+}
+
+.booking__row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-xs) 0;
+  color: var(--color-on-dark-soft);
+  font-size: 14px;
+}
+
+.booking__row--total {
+  border-top: 1px solid var(--color-surface-dark-elevated);
+  margin-top: var(--space-xs);
+  padding-top: var(--space-md);
+  color: var(--color-on-dark);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .booking__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking__actions {
+    flex-direction: column-reverse;
+  }
+
+  .booking__actions button {
+    width: 100%;
+  }
+}

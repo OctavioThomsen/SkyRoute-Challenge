@@ -1,0 +1,46 @@
+<article class="flight-card">
+  <div class="flight-card__header">
+    <div class="flight-card__provider">
+      <span class="flight-card__provider-name">{{ flight().provider }}</span>
+      <span class="badge-pill flight-card__flight-no">{{ flight().flightNumber }}</span>
+    </div>
+    @if (flight().isInternational) {
+      <span class="badge-coral">International</span>
+    } @else {
+      <span class="badge-pill">Domestic</span>
+    }
+  </div>
+
+  <div class="flight-card__route">
+    <div class="flight-card__endpoint">
+      <span class="flight-card__time">{{ flight().departureTime | date: 'HH:mm' }}</span>
+      <span class="flight-card__code">{{ flight().origin }}</span>
+      <span class="flight-card__city">{{ originCity() }}</span>
+    </div>
+
+    <div class="flight-card__leg">
+      <span class="flight-card__duration">{{ flight().durationMinutes | duration }}</span>
+      <span class="flight-card__line" aria-hidden="true"></span>
+      <span class="flight-card__date">{{ flight().departureTime | date: 'MMM d' }}</span>
+    </div>
+
+    <div class="flight-card__endpoint flight-card__endpoint--end">
+      <span class="flight-card__time">{{ flight().arrivalTime | date: 'HH:mm' }}</span>
+      <span class="flight-card__code">{{ flight().destination }}</span>
+      <span class="flight-card__city">{{ destinationCity() }}</span>
+    </div>
+  </div>
+
+  <div class="flight-card__footer">
+    <div class="flight-card__pricing">
+      <span class="flight-card__price">{{ flight().totalPrice | currency: 'USD' }}</span>
+      <span class="flight-card__per-person">
+        {{ flight().pricePerPerson | currency: 'USD' }} per person &middot; {{ flight().cabinClass }}
+      </span>
+    </div>
+
+    @if (selectable()) {
+      <button type="button" class="btn-primary" (click)="onSelect()">Select flight</button>
+    }
+  </div>
+</article>

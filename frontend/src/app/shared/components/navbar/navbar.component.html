@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="navbar__inner container">
+    <a class="navbar__brand" routerLink="/search" (click)="closeMenu()">
+      <span class="navbar__mark" aria-hidden="true">&#10022;</span>
+      <span class="navbar__wordmark">SkyRoute</span>
+    </a>
+
+    <button
+      class="navbar__toggle"
+      type="button"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Toggle navigation menu"
+      (click)="toggleMenu()">
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+    </button>
+
+    <div class="navbar__links" [class.navbar__links--open]="menuOpen()">
+      <a
+        class="navbar__link"
+        routerLink="/search"
+        routerLinkActive="navbar__link--active"
+        (click)="closeMenu()">
+        Search Flights
+      </a>
+      <a class="btn-primary navbar__cta" routerLink="/search" (click)="closeMenu()">
+        Book Now
+      </a>
+    </div>
+  </div>
+</nav>

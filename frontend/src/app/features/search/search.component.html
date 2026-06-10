@@ -1,0 +1,101 @@
+<section class="search">
+  <div class="container search__inner">
+    <div class="search__intro">
+      <span class="badge-coral">Flight Search</span>
+      <h1>Find your next route</h1>
+      <p class="search__lede">
+        Compare fares across GlobalAir and BudgetWings in a single search.
+      </p>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="search__error" role="alert">{{ errorMessage() }}</div>
+    }
+
+    <form class="search__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="search__grid">
+        <div class="search__field">
+          <label class="form-label" for="origin">From</label>
+          <select
+            id="origin"
+            class="form-select"
+            formControlName="origin"
+            [class.is-invalid]="hasError('origin')">
+            <option value="" disabled>Select origin</option>
+            @for (airport of airports; track airport.code) {
+              <option [value]="airport.code">{{ airport.code }} &mdash; {{ airport.city }}</option>
+            }
+          </select>
+          @if (hasError('origin', 'required')) {
+            <span class="field-error">Origin is required.</span>
+          }
+        </div>
+
+        <div class="search__field">
+          <label class="form-label" for="destination">To</label>
+          <select
+            id="destination"
+            class="form-select"
+            formControlName="destination"
+            [class.is-invalid]="hasError('destination') || sameAirport()">
+            <option value="" disabled>Select destination</option>
+            @for (airport of airports; track airport.code) {
+              <option [value]="airport.code">{{ airport.code }} &mdash; {{ airport.city }}</option>
+            }
+          </select>
+          @if (hasError('destination', 'required')) {
+            <span class="field-error">Destination is required.</span>
+          }
+          @if (sameAirport()) {
+            <span class="field-error">Origin and destination must be different.</span>
+          }
+        </div>
+
+        <div class="search__field">
+          <label class="form-label" for="departureDate">Departure date</label>
+          <input
+            id="departureDate"
+            type="date"
+            class="form-input"
+            formControlName="departureDate"
+            [min]="today"
+            [class.is-invalid]="hasError('departureDate') || form.errors?.['pastDate']" />
+          @if (hasError('departureDate', 'required')) {
+            <span class="field-error">Departure date is required.</span>
+          }
+          @if (form.errors?.['pastDate'] && form.get('departureDate')?.touched) {
+            <span class="field-error">Departure date cannot be in the past.</span>
+          }
+        </div>
+
+        <div class="search__field">
+          <label class="form-label" for="passengers">Passengers</label>
+          <input
+            id="passengers"
+            type="number"
+            class="form-input"
+            formControlName="passengers"
+            min="1"
+            max="9"
+            [class.is-invalid]="hasError('passengers')" />
+          @if (hasError('passengers')) {
+            <span class="field-error">Choose between 1 and 9 passengers.</span>
+          }
+        </div>
+
+        <div class="search__field">
+          <label class="form-label" for="cabinClass">Cabin class</label>
+          <select id="cabinClass" class="form-select" formControlName="cabinClass">
+            @for (cabin of cabinClasses; track cabin.value) {
+              <option [value]="cabin.value">{{ cabin.label }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary search__submit" [disabled]="form.invalid || loading()">
+        {{ loading() ? 'Searching...' : 'Search flights' }}
+      </button>
+    </form>
+  </div>
+</section>

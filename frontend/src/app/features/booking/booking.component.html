@@ -1,0 +1,105 @@
+<section class="booking">
+  <div class="container">
+    @if (flight(); as f) {
+      <header class="booking__header">
+        <span class="badge-coral">Booking</span>
+        <h1>Passenger details</h1>
+        <p class="booking__lede">Review your flight and tell us who's flying.</p>
+      </header>
+
+      <div class="booking__layout">
+        <div class="booking__form-col">
+          @if (errorMessage()) {
+            <div class="booking__error" role="alert">{{ errorMessage() }}</div>
+          }
+
+          <form class="booking__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+            <div class="booking__field">
+              <label class="form-label" for="fullName">Full name</label>
+              <input
+                id="fullName"
+                type="text"
+                class="form-input"
+                formControlName="fullName"
+                autocomplete="name"
+                [class.is-invalid]="hasError('fullName')" />
+              @if (hasError('fullName', 'required')) {
+                <span class="field-error">Full name is required.</span>
+              }
+              @if (hasError('fullName', 'minlength')) {
+                <span class="field-error">Please enter a valid name.</span>
+              }
+            </div>
+
+            <div class="booking__field">
+              <label class="form-label" for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                class="form-input"
+                formControlName="email"
+                autocomplete="email"
+                [class.is-invalid]="hasError('email')" />
+              @if (hasError('email', 'required')) {
+                <span class="field-error">Email is required.</span>
+              }
+              @if (hasError('email', 'email')) {
+                <span class="field-error">Enter a valid email address.</span>
+              }
+            </div>
+
+            <div class="booking__field">
+              <label class="form-label" for="documentNumber">{{ documentLabel() }}</label>
+              <input
+                id="documentNumber"
+                type="text"
+                class="form-input"
+                formControlName="documentNumber"
+                [class.is-invalid]="hasError('documentNumber')" />
+              <span class="booking__hint">
+                @if (documentType() === 'Passport') {
+                  International route &mdash; passport required (6&ndash;9 alphanumeric characters).
+                } @else {
+                  Domestic route &mdash; national ID required (7&ndash;8 alphanumeric characters).
+                }
+              </span>
+              @if (hasError('documentNumber', 'required')) {
+                <span class="field-error">{{ documentLabel() }} is required.</span>
+              }
+              @if (hasError('documentNumber', 'pattern')) {
+                <span class="field-error">Please enter a valid {{ documentLabel().toLowerCase() }}.</span>
+              }
+            </div>
+
+            <div class="booking__actions">
+              <button type="button" class="btn-secondary" (click)="back()">Back to results</button>
+              <button type="submit" class="btn-primary" [disabled]="form.invalid || submitting()">
+                {{ submitting() ? 'Booking...' : 'Confirm booking' }}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="booking__summary-col">
+          <app-flight-card [flight]="f" [passengers]="passengers()" [selectable]="false"></app-flight-card>
+
+          <div class="booking__breakdown">
+            <h4 class="booking__breakdown-title">Price breakdown</h4>
+            <div class="booking__row">
+              <span>Price per person</span>
+              <span>{{ f.pricePerPerson | currency: 'USD' }}</span>
+            </div>
+            <div class="booking__row">
+              <span>Passengers</span>
+              <span>&times; {{ passengers() }}</span>
+            </div>
+            <div class="booking__row booking__row--total">
+              <span>Total</span>
+              <span>{{ f.totalPrice | currency: 'USD' }}</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    }
+  </div>
+</section>

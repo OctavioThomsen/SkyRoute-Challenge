@@ -1,0 +1,39 @@
+<section class="confirmation">
+  <div class="container">
+    @if (confirmation(); as c) {
+      <div class="confirmation__card">
+        <span class="confirmation__check" aria-hidden="true">&#10003;</span>
+        <h1>Booking confirmed</h1>
+        <p class="confirmation__lede">
+          Your flight is booked. A confirmation has been sent to the passenger email.
+        </p>
+
+        <div class="confirmation__reference">
+          <span class="confirmation__reference-label">Booking reference</span>
+          <span class="confirmation__reference-value">{{ c.bookingReference }}</span>
+        </div>
+
+        <dl class="confirmation__details">
+          <div class="confirmation__detail">
+            <dt>Passenger</dt>
+            <dd>{{ c.passengerName }}</dd>
+          </div>
+          <div class="confirmation__detail">
+            <dt>Flight</dt>
+            <dd>{{ c.flightNumber }}</dd>
+          </div>
+          <div class="confirmation__detail">
+            <dt>Total paid</dt>
+            <dd>{{ c.totalPrice | currency: 'USD' }}</dd>
+          </div>
+          <div class="confirmation__detail">
+            <dt>Booked on</dt>
+            <dd>{{ c.createdAt | date: 'MMM d, y, HH:mm' }}</dd>
+          </div>
+        </dl>
+
+        <button type="button" class="btn-primary" (click)="bookAnother()">Book another flight</button>
+      </div>
+    }
+  </div>
+</section>

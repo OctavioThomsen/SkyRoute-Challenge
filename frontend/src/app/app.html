@@ -1,4 +1,15 @@
-<h1>SkyRoute</h1>
-<p>SkyRoute frontend up and running</p>
+<app-navbar></app-navbar>
 
-<router-outlet />
+<main class="app-main">
+  <router-outlet />
+</main>
+
+<footer class="app-footer">
+  <div class="container app-footer__inner">
+    <div class="app-footer__brand">
+      <span class="app-footer__mark" aria-hidden="true">&#10022;</span>
+      <span class="app-footer__wordmark">SkyRoute</span>
+    </div>
+    <p class="app-footer__copy">&copy; {{ year }} SkyRoute. Flight aggregation demo platform.</p>
+  </div>
+</footer>

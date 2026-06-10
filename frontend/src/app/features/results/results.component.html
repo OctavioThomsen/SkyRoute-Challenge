@@ -1,0 +1,52 @@
+<section class="results">
+  <div class="container">
+    @if (!searchRequest()) {
+      <app-empty-state
+        title="No active search"
+        message="Start a new flight search to see available routes.">
+      </app-empty-state>
+      <div class="results__center">
+        <button type="button" class="btn-primary" (click)="newSearch()">Search flights</button>
+      </div>
+    } @else {
+      <header class="results__header">
+        <div>
+          <span class="badge-pill">{{ searchRequest()?.cabinClass }}</span>
+          <h1>{{ routeLabel() }}</h1>
+          <p class="results__meta">
+            {{ searchRequest()?.passengers }} passenger(s) &middot;
+            {{ sortedFlights().length }} flight(s) found
+          </p>
+        </div>
+        <button type="button" class="btn-secondary" (click)="newSearch()">Edit search</button>
+      </header>
+
+      @if (sortedFlights().length === 0) {
+        <app-empty-state
+          icon="&#128542;"
+          title="No flights for this route"
+          message="We couldn't find any flights matching your search. Try a different date or route.">
+        </app-empty-state>
+      } @else {
+        <div class="results__toolbar">
+          <label class="form-label results__sort-label" for="sort">Sort by</label>
+          <select id="sort" class="form-select results__sort" (change)="onSortChange($event)">
+            @for (option of sortOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="results__list">
+          @for (flight of sortedFlights(); track flight.flightNumber) {
+            <app-flight-card
+              [flight]="flight"
+              [passengers]="searchRequest()?.passengers ?? 1"
+              (select)="onSelect($event)">
+            </app-flight-card>
+          }
+        </div>
+      }
+    }
+  </div>
+</section>
