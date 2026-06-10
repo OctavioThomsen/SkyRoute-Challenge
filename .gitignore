@@ -16,3 +16,31 @@ obj/
 # Operating system files
 Thumbs.db
 .DS_Store
+
+# =======================================================================
+# Angular 16 Frontend (Visual Studio Code)
+# =======================================================================
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+out-tsc/
+.angular/
+
+# Development
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
