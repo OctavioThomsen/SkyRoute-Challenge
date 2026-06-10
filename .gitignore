@@ -1,0 +1,18 @@
+# =======================================================================
+# .NET 10 Backend (Visual Studio)
+# =======================================================================
+
+# Build artifacts
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+
+# NuGet
+.nuget/
+
+# Operating system files
+Thumbs.db
+.DS_Store
