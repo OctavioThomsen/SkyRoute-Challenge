@@ -19,7 +19,7 @@ export interface BookingRequest {
   pricePerPerson: number;
   totalPrice: number;
   passengers: number;
-  passengerDetails: PassengerDetails;
+  passengerDetailsList: PassengerDetails[];
 }
 
 export interface BookingResponse {

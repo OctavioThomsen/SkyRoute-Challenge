@@ -17,6 +17,6 @@ public class Booking
     public decimal PricePerPerson { get; set; }
     public decimal TotalPrice { get; set; }
     public int Passengers { get; set; }
-    public required PassengerDetails PassengerDetails { get; set; }
+    public required List<PassengerDetails> PassengerDetailsList { get; set; }
     public DateTime CreatedAt { get; set; }
 }

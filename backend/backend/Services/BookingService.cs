@@ -42,7 +42,7 @@ public class BookingService : IBookingService
             PricePerPerson = request.PricePerPerson,
             TotalPrice = request.TotalPrice,
             Passengers = request.Passengers,
-            PassengerDetails = request.PassengerDetails,
+            PassengerDetailsList = request.PassengerDetailsList,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -53,7 +53,7 @@ public class BookingService : IBookingService
         {
             BookingReference = booking.BookingReference,
             FlightNumber = booking.FlightNumber,
-            PassengerName = booking.PassengerDetails.FullName,
+            PassengerName = booking.PassengerDetailsList[0].FullName,
             TotalPrice = booking.TotalPrice,
             CreatedAt = booking.CreatedAt
         };
@@ -84,7 +84,7 @@ public class BookingService : IBookingService
                 PricePerPerson  = b.PricePerPerson,
                 TotalPrice      = b.TotalPrice,
                 Passengers      = b.Passengers,
-                PassengerName   = b.PassengerDetails.FullName,
+                PassengerName   = b.PassengerDetailsList[0].FullName,
                 CreatedAt       = b.CreatedAt
             })
             .ToList();
