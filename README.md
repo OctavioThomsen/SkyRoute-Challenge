@@ -46,8 +46,14 @@ with its own pricing rules, and persists bookings to a JSON store.
 
 ### With Docker (recommended)
 
+First time, or after modifying source code, dependencies, or Dockerfiles:
 ```bash
 docker compose up --build
+```
+
+If the images have already been built and no source code changes were made, you can start the application directly with:
+```bash
+docker compose up
 ```
 
 - Frontend: http://localhost:4200
@@ -113,9 +119,11 @@ The six supported airports are ATL, JFK, MIA, LAX (USA) and AEP, EZE (Argentina)
   departure time) are applied with an Angular computed signal — no extra API calls.
 - **Dynamic document validation.** The passenger form switches the document label and
   validation rule between Passport and National ID based on whether the route is international.
-- **Recurring daily schedule.** Provider flight data is modeled as a recurring daily schedule:
-  a search projects each flight's stored time-of-day onto the requested departure date. This
-  keeps the demo functional for any future date while still honoring the "no past dates" rule.
+- **Exact-date matching with similar-flight suggestions.** A search returns two lists:
+  `matches` (same origin, destination, departure date and cabin) and `suggestions` (same
+  route on other dates or cabins). Flights that already departed are excluded, and arrival
+  times are computed from the stored duration. The UI shows matches first, then a divider
+  followed by the suggestions, so travelers always see nearby alternatives.
 
 ## Trade-offs and known limitations
 

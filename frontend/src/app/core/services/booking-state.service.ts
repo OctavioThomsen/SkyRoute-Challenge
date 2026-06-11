@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Flight, SearchRequest } from '../models/flight.model';
+import { Flight, SearchRequest, SearchResult } from '../models/flight.model';
 import { BookingResponse } from '../models/booking.model';
 
 /**
@@ -10,13 +10,15 @@ import { BookingResponse } from '../models/booking.model';
 @Injectable({ providedIn: 'root' })
 export class BookingStateService {
   readonly searchRequest = signal<SearchRequest | null>(null);
-  readonly results = signal<Flight[]>([]);
+  readonly matches = signal<Flight[]>([]);
+  readonly suggestions = signal<Flight[]>([]);
   readonly selectedFlight = signal<Flight | null>(null);
   readonly confirmation = signal<BookingResponse | null>(null);
 
-  setSearch(request: SearchRequest, results: Flight[]): void {
+  setSearch(request: SearchRequest, result: SearchResult): void {
     this.searchRequest.set(request);
-    this.results.set(results);
+    this.matches.set(result.matches);
+    this.suggestions.set(result.suggestions);
   }
 
   selectFlight(flight: Flight): void {
@@ -29,7 +31,8 @@ export class BookingStateService {
 
   clear(): void {
     this.searchRequest.set(null);
-    this.results.set([]);
+    this.matches.set([]);
+    this.suggestions.set([]);
     this.selectedFlight.set(null);
     this.confirmation.set(null);
   }

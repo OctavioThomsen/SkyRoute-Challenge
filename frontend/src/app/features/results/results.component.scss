@@ -41,6 +41,35 @@
   gap: var(--space-lg);
 }
 
+.results__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-section) 0 var(--space-sm);
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+}
+
+.results__divider-label {
+  font-family: var(--font-display, inherit);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.results__suggestions-hint {
+  color: var(--color-muted);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
 .results__center {
   display: flex;
   justify-content: center;

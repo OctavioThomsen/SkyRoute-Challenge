@@ -1,6 +1,137 @@
-@backend_HostAddress = http://localhost:5091
+@backend_HostAddress = http://localhost:5000
+@api_base = {{backend_HostAddress}}/api
 
-GET {{backend_HostAddress}}/
+### ========== FLIGHT SEARCH ==========
+# POST search flights - USA domestic route
+POST {{api_base}}/flights/search
+Content-Type: application/json
+Accept: application/json
+
+{
+  "origin": "JFK",
+  "destination": "LAX",
+  "departureDate": "2026-08-15",
+  "passengers": 2,
+  "cabinClass": "Economy"
+}
+
+###
+
+# Search with Business Class
+POST {{api_base}}/flights/search
+Content-Type: application/json
+Accept: application/json
+
+{
+  "origin": "JFK",
+  "destination": "EZE",
+  "departureDate": "2026-08-15",
+  "passengers": 1,
+  "cabinClass": "Business"
+}
+
+###
+
+# Search with FirstClass
+POST {{api_base}}/flights/search
+Content-Type: application/json
+Accept: application/json
+
+{
+  "origin": "ATL",
+  "destination": "AEP",
+  "departureDate": "2026-08-16",
+  "passengers": 3,
+  "cabinClass": "FirstClass"
+}
+
+###
+
+### ========== BOOKING ==========
+# POST create booking - International flight (USA to Argentina)
+POST {{api_base}}/bookings
+Content-Type: application/json
+Accept: application/json
+
+{
+  "flightNumber": "GA-101",
+  "provider": "GlobalAir",
+  "origin": "JFK",
+  "destination": "EZE",
+  "departureTime": "2026-08-15T10:30:00",
+  "arrivalTime": "2026-08-16T06:45:00",
+  "durationMinutes": 615,
+  "cabinClass": "Economy",
+  "pricePerPerson": 552.00,
+  "totalPrice": 1104.00,
+  "passengers": 2,
+  "passengerDetails": {
+    "fullName": "Juan Pérez García",
+    "email": "juan.perez@example.com",
+    "documentNumber": "A12345678",
+    "documentType": "Passport"
+  }
+}
+
+###
+
+# POST create booking - Domestic flight (USA to USA) 
+POST {{api_base}}/bookings
+Content-Type: application/json
+Accept: application/json
+
+{
+  "flightNumber": "GA-201",
+  "provider": "GlobalAir",
+  "origin": "JFK",
+  "destination": "LAX",
+  "departureTime": "2026-08-15T07:45:00",
+  "arrivalTime": "2026-08-15T11:10:00",
+  "durationMinutes": 345,
+  "cabinClass": "Business",
+  "pricePerPerson": 1380.00,
+  "totalPrice": 2760.00,
+  "passengers": 2,
+  "passengerDetails": {
+    "fullName": "John Smith",
+    "email": "john.smith@example.com",
+    "documentNumber": "12345678",
+    "documentType": "NationalId"
+  }
+}
+
+###
+
+# POST create single passenger booking
+POST {{api_base}}/bookings
+Content-Type: application/json
+Accept: application/json
+
+{
+  "flightNumber": "GA-103",
+  "provider": "GlobalAir",
+  "origin": "ATL",
+  "destination": "AEP",
+  "departureTime": "2026-08-16T08:00:00",
+  "arrivalTime": "2026-08-16T19:20:00",
+  "durationMinutes": 620,
+  "cabinClass": "FirstClass",
+  "pricePerPerson": 3397.50,
+  "totalPrice": 3397.50,
+  "passengers": 1,
+  "passengerDetails": {
+    "fullName": "Carlos Rodríguez Fernández",
+    "email": "carlos.rodriguez@example.com",
+    "documentNumber": "ES1234567",
+    "documentType": "Passport"
+  }
+}
+
+###
+
+### ========== RESET (DEV/TEST UTILITY) ==========
+# DELETE clear all bookings (development utility)
+DELETE {{api_base}}/bookings/reset
 Accept: application/json
 
 ###
