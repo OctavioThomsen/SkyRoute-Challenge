@@ -46,8 +46,14 @@ with its own pricing rules, and persists bookings to a JSON store.
 
 ### With Docker (recommended)
 
+First time, or after modifying source code, dependencies, or Dockerfiles:
 ```bash
 docker compose up --build
+```
+
+If the images have already been built and no source code changes were made, you can start the application directly with:
+```bash
+docker compose up
 ```
 
 - Frontend: http://localhost:4200
