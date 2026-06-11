@@ -155,12 +155,20 @@ Content-Type: application/json
   "pricePerPerson": 552.00,
   "totalPrice": 1104.00,
   "passengers": 2,
-  "passengerDetails": {
-    "fullName": "Juan Pérez García",
-    "email": "juan.perez@example.com",
-    "documentNumber": "A12345678",
-    "documentType": "Passport"
-  }
+  "passengerDetailsList": [
+    {
+      "fullName": "Juan Pérez García",
+      "email": "juan.perez@example.com",
+      "documentNumber": "A12345678",
+      "documentType": "Passport"
+    },
+    {
+      "fullName": "María López Martínez",
+      "email": "maria.lopez@example.com",
+      "documentNumber": "B9876543",
+      "documentType": "Passport"
+    }
+  ]
 }
 
 ###
@@ -181,12 +189,14 @@ Content-Type: application/json
   "pricePerPerson": 162.00,
   "totalPrice": 162.00,
   "passengers": 1,
-  "passengerDetails": {
-    "fullName": "John Smith",
-    "email": "john.smith@example.com",
-    "documentNumber": "12345678",
-    "documentType": "NationalId"
-  }
+  "passengerDetailsList": [
+    {
+      "fullName": "John Smith",
+      "email": "john.smith@example.com",
+      "documentNumber": "12345678",
+      "documentType": "NationalId"
+    }
+  ]
 }
 
 ###
@@ -207,12 +217,14 @@ Content-Type: application/json
   "pricePerPerson": 3392.50,
   "totalPrice": 3392.50,
   "passengers": 1,
-  "passengerDetails": {
-    "fullName": "Carlos Rodríguez Fernández",
-    "email": "carlos.rodriguez@example.com",
-    "documentNumber": "ES1234567",
-    "documentType": "Passport"
-  }
+  "passengerDetailsList": [
+    {
+      "fullName": "Carlos Rodríguez Fernández",
+      "email": "carlos.rodriguez@example.com",
+      "documentNumber": "ES1234567",
+      "documentType": "Passport"
+    }
+  ]
 }
 
 ###
@@ -233,12 +245,14 @@ Content-Type: application/json
   "pricePerPerson": 552.00,
   "totalPrice": 552.00,
   "passengers": 1,
-  "passengerDetails": {
-    "fullName": "Jane Doe",
-    "email": "jane@example.com",
-    "documentNumber": "!!INVALID!!",
-    "documentType": "Passport"
-  }
+  "passengerDetailsList": [
+    {
+      "fullName": "Jane Doe",
+      "email": "jane@example.com",
+      "documentNumber": "!!INVALID!!",
+      "documentType": "Passport"
+    }
+  ]
 }
 
 ###
