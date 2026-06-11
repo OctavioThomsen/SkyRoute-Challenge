@@ -10,7 +10,6 @@ public class Flight
     public required string Origin { get; set; }
     public required string Destination { get; set; }
     public DateTime DepartureTime { get; set; }
-    public DateTime ArrivalTime { get; set; }
     public int DurationMinutes { get; set; }
     public List<CabinFare> CabinClasses { get; set; } = new();
 }

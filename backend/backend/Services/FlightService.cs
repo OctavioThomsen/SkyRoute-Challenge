@@ -6,8 +6,8 @@ namespace backend.Services;
 
 /// <summary>
 /// Loads provider flight data from JSON at startup, caches it in memory, and answers
-/// search queries by filtering on route/date/cabin and applying the pricing strategy
-/// for each provider.
+/// search queries. Exact matches require origin, destination, departure date and cabin to
+/// match; flights on the same route with a different date or cabin are returned as suggestions.
 /// </summary>
 public class FlightService : IFlightService
 {
@@ -34,52 +34,80 @@ public class FlightService : IFlightService
         _logger.LogInformation("Loaded {Count} flights from provider data files.", _flights.Count);
     }
 
-    public IReadOnlyList<SearchResponse> Search(SearchRequest request)
+    public SearchResult Search(SearchRequest request)
     {
         var isInternational = AirportRegistry.IsInternational(request.Origin, request.Destination);
-
-        var results = new List<SearchResponse>();
+        var matches = new List<SearchResponse>();
+        var suggestions = new List<SearchResponse>();
+        var today = DateTime.UtcNow.Date;
 
         foreach (var flight in _flights)
         {
+            // Same route only (origin + destination).
             if (!string.Equals(flight.Origin, request.Origin, StringComparison.OrdinalIgnoreCase) ||
                 !string.Equals(flight.Destination, request.Destination, StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
 
-            var cabin = flight.CabinClasses
-                .FirstOrDefault(c => string.Equals(c.Class, request.CabinClass, StringComparison.OrdinalIgnoreCase));
-
-            if (cabin is null)
+            // Never offer flights that already departed.
+            if (flight.DepartureTime.Date < today)
             {
                 continue;
             }
 
-            var pricePerPerson = _pricingService.CalculatePricePerPerson(flight.Provider, cabin.BaseFare);
+            var isRequestedDate = flight.DepartureTime.Date == request.DepartureDate.Date;
 
-            // Provider data represents a recurring daily schedule. Project the stored time-of-day
-            // onto the requested departure date so searches work for any future date.
-            var departureTime = request.DepartureDate.Date + flight.DepartureTime.TimeOfDay;
-            var arrivalTime = departureTime.AddMinutes(flight.DurationMinutes);
-
-            results.Add(new SearchResponse
+            foreach (var cabin in flight.CabinClasses)
             {
-                FlightNumber = flight.FlightNumber,
-                Provider = flight.Provider,
-                Origin = flight.Origin,
-                Destination = flight.Destination,
-                DepartureTime = departureTime,
-                ArrivalTime = arrivalTime,
-                DurationMinutes = flight.DurationMinutes,
-                CabinClass = cabin.Class,
-                PricePerPerson = pricePerPerson,
-                TotalPrice = Math.Round(pricePerPerson * request.Passengers, 2),
-                IsInternational = isInternational
-            });
+                var isRequestedCabin = string.Equals(cabin.Class, request.CabinClass, StringComparison.OrdinalIgnoreCase);
+                var response = BuildResponse(flight, cabin, request.Passengers, isInternational);
+
+                // Exact match: requested route + date + cabin.
+                if (isRequestedDate && isRequestedCabin)
+                {
+                    matches.Add(response);
+                }
+                else
+                {
+                    // Same route, but a different date and/or cabin.
+                    suggestions.Add(response);
+                }
+            }
         }
 
-        return results;
+        var orderedSuggestions = suggestions
+            .OrderByDescending(s => string.Equals(s.CabinClass, request.CabinClass, StringComparison.OrdinalIgnoreCase))
+            .ThenBy(s => Math.Abs((s.DepartureTime.Date - request.DepartureDate.Date).Days))
+            .ThenBy(s => s.TotalPrice)
+            .Take(24)
+            .ToList();
+
+        return new SearchResult
+        {
+            Matches = matches.OrderBy(m => m.TotalPrice).ToList(),
+            Suggestions = orderedSuggestions
+        };
+    }
+
+    private SearchResponse BuildResponse(Flight flight, CabinFare cabin, int passengers, bool isInternational)
+    {
+        var pricePerPerson = _pricingService.CalculatePricePerPerson(flight.Provider, cabin.BaseFare);
+
+        return new SearchResponse
+        {
+            FlightNumber = flight.FlightNumber,
+            Provider = flight.Provider,
+            Origin = flight.Origin,
+            Destination = flight.Destination,
+            DepartureTime = flight.DepartureTime,
+            ArrivalTime = flight.DepartureTime.AddMinutes(flight.DurationMinutes),
+            DurationMinutes = flight.DurationMinutes,
+            CabinClass = cabin.Class,
+            PricePerPerson = pricePerPerson,
+            TotalPrice = Math.Round(pricePerPerson * passengers, 2),
+            IsInternational = isInternational
+        };
     }
 
     private IEnumerable<Flight> LoadProviderFile(string path)

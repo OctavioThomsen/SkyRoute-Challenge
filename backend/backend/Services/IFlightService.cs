@@ -7,5 +7,5 @@ namespace backend.Services;
 /// </summary>
 public interface IFlightService
 {
-    IReadOnlyList<SearchResponse> Search(SearchRequest request);
+    SearchResult Search(SearchRequest request);
 }

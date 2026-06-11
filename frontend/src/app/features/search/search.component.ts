@@ -61,9 +61,9 @@ export class SearchComponent {
     this.loading.set(true);
 
     this.flightService.search(request).subscribe({
-      next: (flights) => {
+      next: (result) => {
         this.loading.set(false);
-        this.bookingState.setSearch(request, flights);
+        this.bookingState.setSearch(request, result);
         this.router.navigate(['/results']);
       },
       error: (err) => {

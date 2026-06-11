@@ -21,9 +21,9 @@ public class FlightsController : ControllerBase
     /// Searches available flights for the requested route, date, cabin class and passenger count.
     /// </summary>
     [HttpPost("search")]
-    [ProducesResponseType(typeof(IReadOnlyList<SearchResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SearchResult), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<IReadOnlyList<SearchResponse>> Search([FromBody] SearchRequest request)
+    public ActionResult<SearchResult> Search([FromBody] SearchRequest request)
     {
         if (!ModelState.IsValid)
         {
@@ -62,8 +62,9 @@ public class FlightsController : ControllerBase
 
         var results = _flightService.Search(request);
         _logger.LogInformation(
-            "Flight search {Origin}->{Destination} on {Date} returned {Count} result(s).",
-            request.Origin, request.Destination, request.DepartureDate.Date, results.Count);
+            "Flight search {Origin}->{Destination} on {Date}: {Matches} match(es), {Suggestions} suggestion(s).",
+            request.Origin, request.Destination, request.DepartureDate.Date,
+            results.Matches.Count, results.Suggestions.Count);
 
         return Ok(results);
     }

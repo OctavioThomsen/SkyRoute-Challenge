@@ -27,8 +27,27 @@ export class ResultsComponent {
   ];
 
   // Sorting happens entirely in the frontend, with no additional API calls.
-  readonly sortedFlights = computed<Flight[]>(() => {
-    const flights = [...this.bookingState.results()];
+  readonly sortedFlights = computed<Flight[]>(() =>
+    this.sortFlights(this.bookingState.matches())
+  );
+
+  // Suggestions for the same route on other dates/cabins, shown below a divider.
+  readonly sortedSuggestions = computed<Flight[]>(() =>
+    this.sortFlights(this.bookingState.suggestions())
+  );
+
+  readonly routeLabel = computed(() => {
+    const request = this.searchRequest();
+    if (!request) {
+      return '';
+    }
+    const origin = getAirport(request.origin)?.city ?? request.origin;
+    const destination = getAirport(request.destination)?.city ?? request.destination;
+    return `${origin} to ${destination}`;
+  });
+
+  private sortFlights(source: Flight[]): Flight[] {
+    const flights = [...source];
     switch (this.sortOption()) {
       case 'priceHighToLow':
         return flights.sort((a, b) => b.totalPrice - a.totalPrice);
@@ -42,17 +61,11 @@ export class ResultsComponent {
       default:
         return flights.sort((a, b) => a.totalPrice - b.totalPrice);
     }
-  });
+  }
 
-  readonly routeLabel = computed(() => {
-    const request = this.searchRequest();
-    if (!request) {
-      return '';
-    }
-    const origin = getAirport(request.origin)?.city ?? request.origin;
-    const destination = getAirport(request.destination)?.city ?? request.destination;
-    return `${origin} to ${destination}`;
-  });
+  trackFlight(_index: number, flight: Flight): string {
+    return `${flight.flightNumber}-${flight.departureTime}-${flight.cabinClass}`;
+  }
 
   onSortChange(event: Event): void {
     const value = (event.target as HTMLSelectElement).value as SortOption;

@@ -22,6 +22,11 @@ export interface Flight {
   isInternational: boolean;
 }
 
+export interface SearchResult {
+  matches: Flight[];
+  suggestions: Flight[];
+}
+
 export type SortOption =
   | 'priceLowToHigh'
   | 'priceHighToLow'
