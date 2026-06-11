@@ -21,6 +21,28 @@
         <button type="button" class="btn-secondary" (click)="newSearch()">Edit search</button>
       </header>
 
+      @if (dateSliderItems().length > 0) {
+        <div class="date-slider-wrapper">
+          <div class="date-slider" #dateSlider>
+            @for (item of dateSliderItems(); track item.date) {
+              <button
+                type="button"
+                class="date-chip"
+                [class.date-chip--selected]="item.isSelected"
+                [disabled]="item.isSelected || searching()"
+                (click)="selectDate(item.date)">
+                <span class="date-chip__date">{{ item.date | date: 'MMM d' : 'UTC' }}</span>
+                @if (item.minPricePerPerson !== null) {
+                  <span class="date-chip__price">{{ item.minPricePerPerson | currency: 'USD' : 'symbol' : '1.2-2' }}</span>
+                } @else {
+                  <span class="date-chip__no-flights">&mdash;</span>
+                }
+              </button>
+            }
+          </div>
+        </div>
+      }
+
       @if (sortedFlights().length > 0 || sortedSuggestions().length > 0) {
         <div class="results__toolbar">
           <label class="form-label results__sort-label" for="sort">Sort by</label>
