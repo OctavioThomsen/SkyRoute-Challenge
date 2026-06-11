@@ -7,7 +7,7 @@ namespace backend.Services;
 /// <summary>
 /// Loads provider flight data from JSON at startup, caches it in memory, and answers
 /// search queries. Exact matches require origin, destination, departure date and cabin to
-/// match; flights on the same route with a different date or cabin are returned as suggestions.
+/// match; flights on the same route and cabin with a different date are returned as suggestions.
 /// </summary>
 public class FlightService : IFlightService
 {
@@ -61,24 +61,30 @@ public class FlightService : IFlightService
             foreach (var cabin in flight.CabinClasses)
             {
                 var isRequestedCabin = string.Equals(cabin.Class, request.CabinClass, StringComparison.OrdinalIgnoreCase);
+
+                // Only process the requested cabin class.
+                if (!isRequestedCabin)
+                {
+                    continue;
+                }
+
                 var response = BuildResponse(flight, cabin, request.Passengers, isInternational);
 
                 // Exact match: requested route + date + cabin.
-                if (isRequestedDate && isRequestedCabin)
+                if (isRequestedDate)
                 {
                     matches.Add(response);
                 }
                 else
                 {
-                    // Same route, but a different date and/or cabin.
+                    // Same route + cabin, different date.
                     suggestions.Add(response);
                 }
             }
         }
 
         var orderedSuggestions = suggestions
-            .OrderByDescending(s => string.Equals(s.CabinClass, request.CabinClass, StringComparison.OrdinalIgnoreCase))
-            .ThenBy(s => Math.Abs((s.DepartureTime.Date - request.DepartureDate.Date).Days))
+            .OrderBy(s => Math.Abs((s.DepartureTime.Date - request.DepartureDate.Date).Days))
             .ThenBy(s => s.TotalPrice)
             .Take(24)
             .ToList();

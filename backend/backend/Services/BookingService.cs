@@ -42,7 +42,7 @@ public class BookingService : IBookingService
             PricePerPerson = request.PricePerPerson,
             TotalPrice = request.TotalPrice,
             Passengers = request.Passengers,
-            PassengerDetails = request.PassengerDetails,
+            PassengerDetailsList = request.PassengerDetailsList,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -53,7 +53,7 @@ public class BookingService : IBookingService
         {
             BookingReference = booking.BookingReference,
             FlightNumber = booking.FlightNumber,
-            PassengerName = booking.PassengerDetails.FullName,
+            PassengerName = booking.PassengerDetailsList[0].FullName,
             TotalPrice = booking.TotalPrice,
             CreatedAt = booking.CreatedAt
         };
@@ -63,6 +63,31 @@ public class BookingService : IBookingService
     {
         _logger.LogInformation("Clearing all bookings.");
         return _repository.ClearAsync();
+    }
+
+    public async Task<IReadOnlyList<BookingSummaryResponse>> GetAllAsync()
+    {
+        var bookings = await _repository.GetAllAsync();
+        return bookings
+            .OrderByDescending(b => b.CreatedAt)
+            .Select(b => new BookingSummaryResponse
+            {
+                BookingReference = b.BookingReference,
+                FlightNumber    = b.FlightNumber,
+                Provider        = b.Provider,
+                Origin          = b.Origin,
+                Destination     = b.Destination,
+                DepartureTime   = b.DepartureTime,
+                ArrivalTime     = b.ArrivalTime,
+                DurationMinutes = b.DurationMinutes,
+                CabinClass      = b.CabinClass,
+                PricePerPerson  = b.PricePerPerson,
+                TotalPrice      = b.TotalPrice,
+                Passengers      = b.Passengers,
+                PassengerName   = b.PassengerDetailsList[0].FullName,
+                CreatedAt       = b.CreatedAt
+            })
+            .ToList();
     }
 
     private async Task<string> GenerateUniqueReferenceAsync()

@@ -1,0 +1,347 @@
+.my-bookings {
+  padding: var(--space-xxl) 0 var(--space-section);
+}
+
+.my-bookings__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.my-bookings__count {
+  color: var(--color-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.my-bookings__loading {
+  color: var(--color-muted);
+  text-align: center;
+  padding: var(--space-xxl) 0;
+}
+
+.my-bookings__error {
+  color: var(--color-error);
+  text-align: center;
+  padding: var(--space-xxl) 0;
+}
+
+.my-bookings__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+// ── Item wrapper ─────────────────────────────────────────────────────────────
+.my-bookings__item {
+  display: flex;
+  flex-direction: column;
+}
+
+// Remove bottom radius on flight card so it connects flush with the action bar
+.my-bookings__item > app-flight-card ::ng-deep .flight-card {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+// ── Action bar ───────────────────────────────────────────────────────────────
+.my-bookings__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-xl);
+  background: var(--color-surface-cream-strong);
+  border: 1px solid var(--color-hairline);
+  border-top: none;
+  border-bottom-left-radius: var(--rounded-lg);
+  border-bottom-right-radius: var(--rounded-lg);
+}
+
+// While detail panel is open the action bar loses its bottom radius
+.my-bookings__item:has(.my-bookings__confirmation) .my-bookings__actions {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.my-bookings__ref-badge {
+  font-family: var(--font-code);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+}
+
+// ── Inline confirmation panel ────────────────────────────────────────────────
+// Confirmation styles are scoped to their own component, so we re-declare
+// everything needed here under .my-bookings__confirmation.
+.my-bookings__confirmation {
+  background-color: var(--color-surface-dark);
+  color: var(--color-on-dark);
+  // Override radius: square top, rounded bottom (connects to action bar above)
+  border-radius: 0;
+  border-bottom-left-radius: var(--rounded-lg);
+  border-bottom-right-radius: var(--rounded-lg);
+  padding: var(--space-xxl);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+
+  .confirmation__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--rounded-pill);
+    background-color: var(--color-success);
+    color: var(--color-on-primary);
+    font-size: 28px;
+  }
+
+  h2 {
+    color: var(--color-on-dark);
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+  }
+
+  .confirmation__lede {
+    color: var(--color-on-dark-soft);
+  }
+
+  .confirmation__reference {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xxs);
+    background-color: var(--color-surface-dark-elevated);
+    border-radius: var(--rounded-lg);
+    padding: var(--space-lg) var(--space-xl);
+    width: 100%;
+    margin: var(--space-sm) 0;
+  }
+
+  .confirmation__reference-label {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-on-dark-soft);
+  }
+
+  .confirmation__reference-value {
+    font-family: var(--font-code);
+    font-size: 28px;
+    color: var(--color-primary);
+    letter-spacing: 2px;
+  }
+
+  .confirmation__details {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .confirmation__detail {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-surface-dark-elevated);
+    padding-top: var(--space-xs);
+
+    dt {
+      color: var(--color-on-dark-soft);
+      font-size: 14px;
+    }
+
+    dd {
+      margin: 0;
+      color: var(--color-on-dark);
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .my-bookings__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .my-bookings__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+.my-bookings__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.my-bookings__count {
+  color: var(--color-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.my-bookings__loading,
+.my-bookings__error {
+  color: var(--color-muted);
+  text-align: center;
+  padding: var(--space-xxl) 0;
+}
+
+.my-bookings__error {
+  color: var(--color-error, #c0392b);
+}
+
+.my-bookings__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+// ── Booking card ────────────────────────────────────────────────────────────
+.booking-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.booking-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.booking-card__ref {
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.04em;
+}
+
+.booking-card__date {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.booking-card__route {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.booking-card__endpoint {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.booking-card__endpoint--right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.booking-card__time {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.booking-card__airport {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.booking-card__city {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.booking-card__middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.booking-card__arrow {
+  font-size: 18px;
+  color: var(--color-primary);
+}
+
+.booking-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.booking-card__passenger {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.booking-card__price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.booking-card__price-sub {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+@media (max-width: 600px) {
+  .my-bookings__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .booking-card__route {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .booking-card__endpoint--right {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .booking-card__middle {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}

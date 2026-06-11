@@ -1,9 +1,10 @@
 namespace backend.Models;
 
 /// <summary>
-/// A booking persisted to the bookings data file.
+/// A booking summary returned in the list of all bookings.
+/// Document numbers are intentionally excluded from this projection.
 /// </summary>
-public class Booking
+public class BookingSummaryResponse
 {
     public required string BookingReference { get; set; }
     public required string FlightNumber { get; set; }
@@ -17,6 +18,6 @@ public class Booking
     public decimal PricePerPerson { get; set; }
     public decimal TotalPrice { get; set; }
     public int Passengers { get; set; }
-    public required List<PassengerDetails> PassengerDetailsList { get; set; }
+    public required string PassengerName { get; set; }
     public DateTime CreatedAt { get; set; }
 }

@@ -8,5 +8,6 @@ namespace backend.Services;
 public interface IBookingService
 {
     Task<BookingResponse> CreateAsync(BookingRequest request);
+    Task<IReadOnlyList<BookingSummaryResponse>> GetAllAsync();
     Task ResetAsync();
 }

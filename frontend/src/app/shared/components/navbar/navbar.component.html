@@ -24,8 +24,12 @@
         (click)="closeMenu()">
         Search Flights
       </a>
-      <a class="btn-primary navbar__cta" routerLink="/search" (click)="closeMenu()">
-        Book Now
+      <a
+        class="navbar__link navbar__cta"
+        routerLink="/my-bookings"
+        routerLinkActive="navbar__link--active"
+        (click)="closeMenu()">
+        My Bookings
       </a>
     </div>
   </div>

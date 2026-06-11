@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { BookingRequest, BookingResponse } from '../models/booking.model';
+import { BookingRequest, BookingResponse, BookingSummary } from '../models/booking.model';
 
 @Injectable({ providedIn: 'root' })
 export class BookingService {
@@ -11,6 +11,10 @@ export class BookingService {
 
   create(request: BookingRequest): Observable<BookingResponse> {
     return this.http.post<BookingResponse>(this.baseUrl, request);
+  }
+
+  getAll(): Observable<BookingSummary[]> {
+    return this.http.get<BookingSummary[]>(this.baseUrl);
   }
 
   reset(): Observable<{ message: string }> {

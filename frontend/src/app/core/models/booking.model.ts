@@ -19,7 +19,7 @@ export interface BookingRequest {
   pricePerPerson: number;
   totalPrice: number;
   passengers: number;
-  passengerDetails: PassengerDetails;
+  passengerDetailsList: PassengerDetails[];
 }
 
 export interface BookingResponse {
@@ -27,5 +27,22 @@ export interface BookingResponse {
   flightNumber: string;
   passengerName: string;
   totalPrice: number;
+  createdAt: string;
+}
+
+export interface BookingSummary {
+  bookingReference: string;
+  flightNumber: string;
+  provider: string;
+  origin: string;
+  destination: string;
+  departureTime: string;
+  arrivalTime: string;
+  durationMinutes: number;
+  cabinClass: string;
+  pricePerPerson: number;
+  totalPrice: number;
+  passengers: number;
+  passengerName: string;
   createdAt: string;
 }

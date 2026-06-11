@@ -19,6 +19,17 @@ public partial class BookingsController : ControllerBase
     }
 
     /// <summary>
+    /// Returns all bookings, most recent first.
+    /// </summary>
+    [HttpGet]
+    [ProducesResponseType(typeof(IReadOnlyList<BookingSummaryResponse>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<BookingSummaryResponse>>> GetAll()
+    {
+        var bookings = await _bookingService.GetAllAsync();
+        return Ok(bookings);
+    }
+
+    /// <summary>
     /// Creates a booking for the selected flight and passenger details.
     /// </summary>
     [HttpPost]
@@ -60,33 +71,37 @@ public partial class BookingsController : ControllerBase
 
     private void ValidateDocument(BookingRequest request)
     {
-        var details = request.PassengerDetails;
-        var documentNumber = details.DocumentNumber ?? string.Empty;
+        for (int i = 0; i < request.PassengerDetailsList.Count; i++)
+        {
+            var details = request.PassengerDetailsList[i];
+            var documentNumber = details.DocumentNumber ?? string.Empty;
+            var prefix = $"PassengerDetailsList[{i}]";
 
-        if (string.Equals(details.DocumentType, "Passport", StringComparison.OrdinalIgnoreCase))
-        {
-            if (!PassportRegex().IsMatch(documentNumber))
+            if (string.Equals(details.DocumentType, "Passport", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!PassportRegex().IsMatch(documentNumber))
+                {
+                    ModelState.AddModelError(
+                        $"{prefix}.DocumentNumber",
+                        $"Passenger {i + 1}: Passport number must be alphanumeric and 6-9 characters long.");
+                }
+            }
+            else if (string.Equals(details.DocumentType, "NationalId", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(details.DocumentType, "National ID", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!NationalIdRegex().IsMatch(documentNumber))
+                {
+                    ModelState.AddModelError(
+                        $"{prefix}.DocumentNumber",
+                        $"Passenger {i + 1}: National ID must be 7-8 alphanumeric characters.");
+                }
+            }
+            else
             {
                 ModelState.AddModelError(
-                    "PassengerDetails.DocumentNumber",
-                    "Passport number must be alphanumeric and 6-9 characters long.");
+                    $"{prefix}.DocumentType",
+                    $"Passenger {i + 1}: Document type must be Passport or NationalId.");
             }
-        }
-        else if (string.Equals(details.DocumentType, "NationalId", StringComparison.OrdinalIgnoreCase) ||
-                 string.Equals(details.DocumentType, "National ID", StringComparison.OrdinalIgnoreCase))
-        {
-            if (!NationalIdRegex().IsMatch(documentNumber))
-            {
-                ModelState.AddModelError(
-                    "PassengerDetails.DocumentNumber",
-                    "National ID must be 7-8 alphanumeric characters.");
-            }
-        }
-        else
-        {
-            ModelState.AddModelError(
-                "PassengerDetails.DocumentType",
-                "Document type must be Passport or NationalId.");
         }
     }
 

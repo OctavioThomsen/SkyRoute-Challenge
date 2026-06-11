@@ -54,10 +54,24 @@
   margin-top: var(--space-xxs);
 }
 
+.booking__passenger + .booking__passenger {
+  margin-top: var(--space-lg);
+}
+
+.booking__passenger-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-hairline);
+  margin: 0 0 var(--space-sm);
+}
+
 .booking__actions {
   display: flex;
   justify-content: space-between;
   gap: var(--space-md);
+  margin-top: var(--space-lg);
 }
 
 .booking__summary-col {

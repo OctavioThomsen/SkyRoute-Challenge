@@ -1,136 +1,277 @@
 @backend_HostAddress = http://localhost:5000
 @api_base = {{backend_HostAddress}}/api
 
-### ========== FLIGHT SEARCH ==========
-# POST search flights - USA domestic route
+### =====================================================================
+###  FLIGHTS — POST /api/flights/search
+###  Returns: { matches: SearchResponse[], suggestions: SearchResponse[] }
+###  Exact match  → same origin + destination + date + cabin
+###  Suggestions  → same route + cabin, different date
+### =====================================================================
+
+# Exact match: JFK → EZE, Economy (2026-06-11 — has flights)
 POST {{api_base}}/flights/search
 Content-Type: application/json
-Accept: application/json
 
 {
   "origin": "JFK",
-  "destination": "LAX",
-  "departureDate": "2026-08-15",
+  "destination": "EZE",
+  "departureDate": "2026-06-11",
   "passengers": 2,
   "cabinClass": "Economy"
 }
 
 ###
 
-# Search with Business Class
+# Exact match: JFK → LAX, Economy — domestic route (isInternational=false)
 POST {{api_base}}/flights/search
 Content-Type: application/json
-Accept: application/json
 
 {
   "origin": "JFK",
-  "destination": "EZE",
-  "departureDate": "2026-08-15",
+  "destination": "LAX",
+  "departureDate": "2026-06-11",
+  "passengers": 1,
+  "cabinClass": "Economy"
+}
+
+###
+
+# Exact match: ATL → AEP, Business
+POST {{api_base}}/flights/search
+Content-Type: application/json
+
+{
+  "origin": "ATL",
+  "destination": "AEP",
+  "departureDate": "2026-06-14",
   "passengers": 1,
   "cabinClass": "Business"
 }
 
 ###
 
-# Search with FirstClass
+# Exact match: MIA → EZE, FirstClass
 POST {{api_base}}/flights/search
 Content-Type: application/json
-Accept: application/json
 
 {
-  "origin": "ATL",
-  "destination": "AEP",
-  "departureDate": "2026-08-16",
-  "passengers": 3,
+  "origin": "MIA",
+  "destination": "EZE",
+  "departureDate": "2026-06-12",
+  "passengers": 1,
   "cabinClass": "FirstClass"
 }
 
 ###
 
-### ========== BOOKING ==========
-# POST create booking - International flight (USA to Argentina)
+# No exact matches — date with no flights → suggestions only
+POST {{api_base}}/flights/search
+Content-Type: application/json
+
+{
+  "origin": "JFK",
+  "destination": "EZE",
+  "departureDate": "2026-06-13",
+  "passengers": 1,
+  "cabinClass": "Economy"
+}
+
+###
+
+# Validation error: past date (400)
+POST {{api_base}}/flights/search
+Content-Type: application/json
+
+{
+  "origin": "JFK",
+  "destination": "EZE",
+  "departureDate": "2020-01-01",
+  "passengers": 1,
+  "cabinClass": "Economy"
+}
+
+###
+
+# Validation error: origin == destination (400)
+POST {{api_base}}/flights/search
+Content-Type: application/json
+
+{
+  "origin": "JFK",
+  "destination": "JFK",
+  "departureDate": "2026-06-15",
+  "passengers": 1,
+  "cabinClass": "Economy"
+}
+
+###
+
+# Validation error: invalid airport code (400)
+POST {{api_base}}/flights/search
+Content-Type: application/json
+
+{
+  "origin": "ZZZ",
+  "destination": "EZE",
+  "departureDate": "2026-06-15",
+  "passengers": 1,
+  "cabinClass": "Economy"
+}
+
+###
+
+# Validation error: passengers out of range (400)
+POST {{api_base}}/flights/search
+Content-Type: application/json
+
+{
+  "origin": "JFK",
+  "destination": "EZE",
+  "departureDate": "2026-06-15",
+  "passengers": 10,
+  "cabinClass": "Economy"
+}
+
+###
+
+### =====================================================================
+###  BOOKINGS — POST /api/bookings
+###  Returns 201 Created with BookingResponse (SKY-XXXXXX reference)
+### =====================================================================
+
+# Create booking — international, Passport, 2 passengers (GlobalAir)
 POST {{api_base}}/bookings
 Content-Type: application/json
-Accept: application/json
 
 {
   "flightNumber": "GA-101",
   "provider": "GlobalAir",
   "origin": "JFK",
   "destination": "EZE",
-  "departureTime": "2026-08-15T10:30:00",
-  "arrivalTime": "2026-08-16T06:45:00",
+  "departureTime": "2026-06-11T10:30:00",
+  "arrivalTime": "2026-06-11T20:45:00",
   "durationMinutes": 615,
   "cabinClass": "Economy",
   "pricePerPerson": 552.00,
   "totalPrice": 1104.00,
   "passengers": 2,
-  "passengerDetails": {
-    "fullName": "Juan Pérez García",
-    "email": "juan.perez@example.com",
-    "documentNumber": "A12345678",
-    "documentType": "Passport"
-  }
+  "passengerDetailsList": [
+    {
+      "fullName": "Juan Pérez García",
+      "email": "juan.perez@example.com",
+      "documentNumber": "A12345678",
+      "documentType": "Passport"
+    },
+    {
+      "fullName": "María López Martínez",
+      "email": "maria.lopez@example.com",
+      "documentNumber": "B9876543",
+      "documentType": "Passport"
+    }
+  ]
 }
 
 ###
 
-# POST create booking - Domestic flight (USA to USA) 
+# Create booking — domestic, NationalId, 1 passenger (BudgetWings)
 POST {{api_base}}/bookings
 Content-Type: application/json
-Accept: application/json
 
 {
-  "flightNumber": "GA-201",
-  "provider": "GlobalAir",
+  "flightNumber": "BW-520",
+  "provider": "BudgetWings",
   "origin": "JFK",
   "destination": "LAX",
-  "departureTime": "2026-08-15T07:45:00",
-  "arrivalTime": "2026-08-15T11:10:00",
-  "durationMinutes": 345,
-  "cabinClass": "Business",
-  "pricePerPerson": 1380.00,
-  "totalPrice": 2760.00,
-  "passengers": 2,
-  "passengerDetails": {
-    "fullName": "John Smith",
-    "email": "john.smith@example.com",
-    "documentNumber": "12345678",
-    "documentType": "NationalId"
-  }
+  "departureTime": "2026-06-11T06:15:00",
+  "arrivalTime": "2026-06-11T11:50:00",
+  "durationMinutes": 335,
+  "cabinClass": "Economy",
+  "pricePerPerson": 162.00,
+  "totalPrice": 162.00,
+  "passengers": 1,
+  "passengerDetailsList": [
+    {
+      "fullName": "John Smith",
+      "email": "john.smith@example.com",
+      "documentNumber": "12345678",
+      "documentType": "NationalId"
+    }
+  ]
 }
 
 ###
 
-# POST create single passenger booking
+# Create booking — international, FirstClass (GlobalAir)
 POST {{api_base}}/bookings
 Content-Type: application/json
-Accept: application/json
 
 {
   "flightNumber": "GA-103",
   "provider": "GlobalAir",
   "origin": "ATL",
   "destination": "AEP",
-  "departureTime": "2026-08-16T08:00:00",
-  "arrivalTime": "2026-08-16T19:20:00",
+  "departureTime": "2026-06-14T08:00:00",
+  "arrivalTime": "2026-06-14T18:20:00",
   "durationMinutes": 620,
   "cabinClass": "FirstClass",
-  "pricePerPerson": 3397.50,
-  "totalPrice": 3397.50,
+  "pricePerPerson": 3392.50,
+  "totalPrice": 3392.50,
   "passengers": 1,
-  "passengerDetails": {
-    "fullName": "Carlos Rodríguez Fernández",
-    "email": "carlos.rodriguez@example.com",
-    "documentNumber": "ES1234567",
-    "documentType": "Passport"
-  }
+  "passengerDetailsList": [
+    {
+      "fullName": "Carlos Rodríguez Fernández",
+      "email": "carlos.rodriguez@example.com",
+      "documentNumber": "ES1234567",
+      "documentType": "Passport"
+    }
+  ]
 }
 
 ###
 
-### ========== RESET (DEV/TEST UTILITY) ==========
-# DELETE clear all bookings (development utility)
+# Validation error: invalid document format (400)
+POST {{api_base}}/bookings
+Content-Type: application/json
+
+{
+  "flightNumber": "GA-101",
+  "provider": "GlobalAir",
+  "origin": "JFK",
+  "destination": "EZE",
+  "departureTime": "2026-06-11T10:30:00",
+  "arrivalTime": "2026-06-11T20:45:00",
+  "durationMinutes": 615,
+  "cabinClass": "Economy",
+  "pricePerPerson": 552.00,
+  "totalPrice": 552.00,
+  "passengers": 1,
+  "passengerDetailsList": [
+    {
+      "fullName": "Jane Doe",
+      "email": "jane@example.com",
+      "documentNumber": "!!INVALID!!",
+      "documentType": "Passport"
+    }
+  ]
+}
+
+###
+
+### =====================================================================
+###  BOOKINGS — GET /api/bookings
+###  Returns all bookings ordered by creation date (most recent first)
+### =====================================================================
+
+GET {{api_base}}/bookings
+Accept: application/json
+
+###
+
+### =====================================================================
+###  BOOKINGS — DELETE /api/bookings/reset
+###  Clears all persisted bookings (development / test utility)
+### =====================================================================
+
 DELETE {{api_base}}/bookings/reset
 Accept: application/json
 

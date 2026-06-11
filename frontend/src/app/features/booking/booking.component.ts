@@ -1,6 +1,6 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BookingRequest, DocumentType } from '../../core/models/booking.model';
 import { BookingService } from '../../core/services/booking.service';
@@ -33,30 +33,37 @@ export class BookingComponent implements OnInit {
     this.documentType() === 'Passport' ? 'Passport number' : 'National ID'
   );
 
-  readonly form = this.fb.nonNullable.group({
-    fullName: ['', [Validators.required, Validators.minLength(2)]],
-    email: ['', [Validators.required, Validators.email]],
-    documentNumber: ['', [Validators.required]]
+  readonly form = this.fb.group({
+    passengerList: this.fb.array<FormGroup>([])
   });
+
+  get passengerList(): FormArray {
+    return this.form.get('passengerList') as FormArray;
+  }
 
   ngOnInit(): void {
     if (!this.flight()) {
       this.router.navigate(['/search']);
       return;
     }
-    this.applyDocumentValidators();
+    for (let i = 0; i < this.passengers(); i++) {
+      this.passengerList.push(this.buildPassengerGroup());
+    }
   }
 
-  private applyDocumentValidators(): void {
-    const control = this.form.controls.documentNumber;
+  private buildPassengerGroup(): FormGroup {
     const pattern =
       this.documentType() === 'Passport' ? /^[A-Za-z0-9]{6,9}$/ : /^[A-Za-z0-9]{7,8}$/;
-    control.setValidators([Validators.required, Validators.pattern(pattern)]);
-    control.updateValueAndValidity();
+    return this.fb.group({
+      fullName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      documentNumber: ['', [Validators.required, Validators.pattern(pattern)]]
+    });
   }
 
-  hasError(controlName: string, error?: string): boolean {
-    const control = this.form.get(controlName);
+  hasError(index: number, controlName: string, error?: string): boolean {
+    const group = this.passengerList.at(index) as FormGroup;
+    const control = group?.get(controlName);
     if (!control || !(control.touched || control.dirty)) {
       return false;
     }
@@ -71,7 +78,17 @@ export class BookingComponent implements OnInit {
       return;
     }
 
-    const value = this.form.getRawValue();
+    const passengerDetailsList = (this.passengerList.value as Array<{
+      fullName: string;
+      email: string;
+      documentNumber: string;
+    }>).map(v => ({
+      fullName: v.fullName,
+      email: v.email,
+      documentNumber: v.documentNumber,
+      documentType: this.documentType()
+    }));
+
     const request: BookingRequest = {
       flightNumber: flight.flightNumber,
       provider: flight.provider,
@@ -84,12 +101,7 @@ export class BookingComponent implements OnInit {
       pricePerPerson: flight.pricePerPerson,
       totalPrice: flight.totalPrice,
       passengers: this.passengers(),
-      passengerDetails: {
-        fullName: value.fullName,
-        email: value.email,
-        documentNumber: value.documentNumber,
-        documentType: this.documentType()
-      }
+      passengerDetailsList
     };
 
     this.submitting.set(true);

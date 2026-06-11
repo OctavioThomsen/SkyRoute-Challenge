@@ -26,5 +26,11 @@ export const routes: Routes = [
       import('./features/confirmation/confirmation.component').then((m) => m.ConfirmationComponent),
     title: 'Confirmation | SkyRoute'
   },
+  {
+    path: 'my-bookings',
+    loadComponent: () =>
+      import('./features/my-bookings/my-bookings.component').then((m) => m.MyBookingsComponent),
+    title: 'My Bookings | SkyRoute'
+  },
   { path: '**', redirectTo: 'search' }
 ];

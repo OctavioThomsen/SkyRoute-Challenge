@@ -52,5 +52,6 @@ public class BookingRequest
     public int Passengers { get; set; }
 
     [Required]
-    public required PassengerDetails PassengerDetails { get; set; }
+    [MinLength(1)]
+    public required List<PassengerDetails> PassengerDetailsList { get; set; }
 }
