@@ -26,6 +26,7 @@ builder.Services.AddOpenApi();
 // Pricing strategies (Strategy pattern) — add new providers here without touching existing code.
 builder.Services.AddSingleton<IPricingStrategy, GlobalAirPricingStrategy>();
 builder.Services.AddSingleton<IPricingStrategy, BudgetWingsPricingStrategy>();
+builder.Services.AddSingleton<IPricingStrategy, ArcticAirStrategy>();
 builder.Services.AddSingleton<IPricingService, PricingService>();
 
 builder.Services.AddSingleton<IFlightService, FlightService>();

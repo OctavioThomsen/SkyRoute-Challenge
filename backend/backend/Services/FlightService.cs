@@ -29,6 +29,7 @@ public class FlightService : IFlightService
         var flights = new List<Flight>();
         flights.AddRange(LoadProviderFile(Path.Combine(dataDirectory, "globalair.json")));
         flights.AddRange(LoadProviderFile(Path.Combine(dataDirectory, "budgetwings.json")));
+        flights.AddRange(LoadProviderFile(Path.Combine(dataDirectory, "arcticair.json")));
         _flights = flights;
 
         _logger.LogInformation("Loaded {Count} flights from provider data files.", _flights.Count);
