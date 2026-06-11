@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AIRPORTS } from '../../core/data/airports';
@@ -12,7 +12,7 @@ import { BookingStateService } from '../../core/services/booking-state.service';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly flightService = inject(FlightService);
   private readonly bookingState = inject(BookingStateService);
@@ -41,6 +41,15 @@ export class SearchComponent {
   );
 
   readonly sameAirport = computed(() => this.form.errors?.['sameAirport'] ?? false);
+
+  ngOnInit(): void {
+    // Restore the previous search (e.g. when returning via "Edit search") so the user
+    // doesn't lose their criteria. State is only cleared on app start or after a booking.
+    const previous = this.bookingState.searchRequest();
+    if (previous) {
+      this.form.patchValue(previous);
+    }
+  }
 
   hasError(controlName: string, error?: string): boolean {
     const control = this.form.get(controlName);
