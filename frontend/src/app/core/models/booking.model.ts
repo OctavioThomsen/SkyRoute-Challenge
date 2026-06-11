@@ -29,3 +29,20 @@ export interface BookingResponse {
   totalPrice: number;
   createdAt: string;
 }
+
+export interface BookingSummary {
+  bookingReference: string;
+  flightNumber: string;
+  provider: string;
+  origin: string;
+  destination: string;
+  departureTime: string;
+  arrivalTime: string;
+  durationMinutes: number;
+  cabinClass: string;
+  pricePerPerson: number;
+  totalPrice: number;
+  passengers: number;
+  passengerName: string;
+  createdAt: string;
+}

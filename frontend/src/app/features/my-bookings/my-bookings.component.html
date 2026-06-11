@@ -1,0 +1,86 @@
+<section class="my-bookings">
+  <div class="container">
+    <header class="my-bookings__header">
+      <h1>My Bookings</h1>
+      <button type="button" class="btn-primary" (click)="newSearch()">New search</button>
+    </header>
+
+    @if (loading()) {
+      <p class="my-bookings__loading">Loading your bookings&hellip;</p>
+    } @else if (errorMessage()) {
+      <p class="my-bookings__error">{{ errorMessage() }}</p>
+    } @else if (bookings().length === 0) {
+      <app-empty-state
+        icon="&#128196;"
+        title="No bookings yet"
+        message="You haven't made any bookings. Start a search to find your next flight.">
+      </app-empty-state>
+    } @else {
+      <p class="my-bookings__count">{{ bookings().length }} booking(s)</p>
+      <div class="my-bookings__list">
+        @for (booking of bookings(); track booking.bookingReference) {
+          <div class="my-bookings__item">
+
+            <!-- Flight card — identical look to /results, no "Select flight" button -->
+            <app-flight-card
+              [flight]="toFlight(booking)"
+              [passengers]="booking.passengers"
+              [selectable]="false">
+            </app-flight-card>
+
+            <!-- Action bar: booking reference + View confirmation toggle -->
+            <div class="my-bookings__actions">
+              <span class="my-bookings__ref-badge">{{ booking.bookingReference }}</span>
+              <button
+                type="button"
+                class="btn-secondary"
+                (click)="toggleDetail(booking.bookingReference)">
+                {{ expandedRef() === booking.bookingReference ? 'Hide detail' : 'View confirmation' }}
+              </button>
+            </div>
+
+            <!-- Inline confirmation panel — reuses confirmation component styles -->
+            @if (expandedRef() === booking.bookingReference) {
+              <div class="confirmation__card my-bookings__confirmation">
+                <span class="confirmation__check" aria-hidden="true">&#10003;</span>
+                <h2>Booking confirmed</h2>
+                <p class="confirmation__lede">
+                  Your flight is booked. A confirmation has been sent to the passenger email.
+                </p>
+
+                <div class="confirmation__reference">
+                  <span class="confirmation__reference-label">Booking reference</span>
+                  <span class="confirmation__reference-value">{{ booking.bookingReference }}</span>
+                </div>
+
+                <dl class="confirmation__details">
+                  <div class="confirmation__detail">
+                    <dt>Passenger</dt>
+                    <dd>{{ booking.passengerName }}</dd>
+                  </div>
+                  <div class="confirmation__detail">
+                    <dt>Flight</dt>
+                    <dd>{{ booking.flightNumber }}</dd>
+                  </div>
+                  <div class="confirmation__detail">
+                    <dt>Passengers</dt>
+                    <dd>{{ booking.passengers }}</dd>
+                  </div>
+                  <div class="confirmation__detail">
+                    <dt>Total paid</dt>
+                    <dd>{{ booking.totalPrice | currency: 'USD' }}</dd>
+                  </div>
+                  <div class="confirmation__detail">
+                    <dt>Booked on</dt>
+                    <dd>{{ booking.createdAt | date: 'MMM d, y, HH:mm' }}</dd>
+                  </div>
+                </dl>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
+

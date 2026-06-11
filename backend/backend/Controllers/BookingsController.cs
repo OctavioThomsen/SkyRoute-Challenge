@@ -19,6 +19,17 @@ public partial class BookingsController : ControllerBase
     }
 
     /// <summary>
+    /// Returns all bookings, most recent first.
+    /// </summary>
+    [HttpGet]
+    [ProducesResponseType(typeof(IReadOnlyList<BookingSummaryResponse>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<BookingSummaryResponse>>> GetAll()
+    {
+        var bookings = await _bookingService.GetAllAsync();
+        return Ok(bookings);
+    }
+
+    /// <summary>
     /// Creates a booking for the selected flight and passenger details.
     /// </summary>
     [HttpPost]

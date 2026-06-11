@@ -65,6 +65,31 @@ public class BookingService : IBookingService
         return _repository.ClearAsync();
     }
 
+    public async Task<IReadOnlyList<BookingSummaryResponse>> GetAllAsync()
+    {
+        var bookings = await _repository.GetAllAsync();
+        return bookings
+            .OrderByDescending(b => b.CreatedAt)
+            .Select(b => new BookingSummaryResponse
+            {
+                BookingReference = b.BookingReference,
+                FlightNumber    = b.FlightNumber,
+                Provider        = b.Provider,
+                Origin          = b.Origin,
+                Destination     = b.Destination,
+                DepartureTime   = b.DepartureTime,
+                ArrivalTime     = b.ArrivalTime,
+                DurationMinutes = b.DurationMinutes,
+                CabinClass      = b.CabinClass,
+                PricePerPerson  = b.PricePerPerson,
+                TotalPrice      = b.TotalPrice,
+                Passengers      = b.Passengers,
+                PassengerName   = b.PassengerDetails.FullName,
+                CreatedAt       = b.CreatedAt
+            })
+            .ToList();
+    }
+
     private async Task<string> GenerateUniqueReferenceAsync()
     {
         for (var attempt = 0; attempt < 25; attempt++)
