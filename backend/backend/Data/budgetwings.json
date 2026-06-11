@@ -1,128 +1,23 @@
 [
-  {
-    "flightNumber": "BW-410",
-    "provider": "BudgetWings",
-    "origin": "JFK",
-    "destination": "EZE",
-    "departureTime": "2025-08-15T18:25:00",
-    "arrivalTime": "2025-08-16T14:50:00",
-    "durationMinutes": 625,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 410.00 },
-      { "class": "Business", "baseFare": 980.00 },
-      { "class": "FirstClass", "baseFare": 2200.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-411",
-    "provider": "BudgetWings",
-    "origin": "MIA",
-    "destination": "AEP",
-    "departureTime": "2025-08-15T20:00:00",
-    "arrivalTime": "2025-08-16T06:30:00",
-    "durationMinutes": 510,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 365.00 },
-      { "class": "Business", "baseFare": 910.00 },
-      { "class": "FirstClass", "baseFare": 2050.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-412",
-    "provider": "BudgetWings",
-    "origin": "LAX",
-    "destination": "EZE",
-    "departureTime": "2025-08-16T07:30:00",
-    "arrivalTime": "2025-08-16T23:10:00",
-    "durationMinutes": 760,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 520.00 },
-      { "class": "Business", "baseFare": 1180.00 },
-      { "class": "FirstClass", "baseFare": 2500.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-520",
-    "provider": "BudgetWings",
-    "origin": "JFK",
-    "destination": "LAX",
-    "departureTime": "2025-08-15T06:15:00",
-    "arrivalTime": "2025-08-15T09:50:00",
-    "durationMinutes": 335,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 180.00 },
-      { "class": "Business", "baseFare": 520.00 },
-      { "class": "FirstClass", "baseFare": 1180.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-521",
-    "provider": "BudgetWings",
-    "origin": "ATL",
-    "destination": "JFK",
-    "departureTime": "2025-08-15T12:40:00",
-    "arrivalTime": "2025-08-15T14:55:00",
-    "durationMinutes": 135,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 110.00 },
-      { "class": "Business", "baseFare": 320.00 },
-      { "class": "FirstClass", "baseFare": 690.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-522",
-    "provider": "BudgetWings",
-    "origin": "MIA",
-    "destination": "ATL",
-    "departureTime": "2025-08-15T17:10:00",
-    "arrivalTime": "2025-08-15T18:55:00",
-    "durationMinutes": 105,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 95.00 },
-      { "class": "Business", "baseFare": 290.00 },
-      { "class": "FirstClass", "baseFare": 640.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-610",
-    "provider": "BudgetWings",
-    "origin": "EZE",
-    "destination": "AEP",
-    "departureTime": "2025-08-16T10:05:00",
-    "arrivalTime": "2025-08-16T10:45:00",
-    "durationMinutes": 40,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 30.00 },
-      { "class": "Business", "baseFare": 150.00 },
-      { "class": "FirstClass", "baseFare": 360.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-611",
-    "provider": "BudgetWings",
-    "origin": "EZE",
-    "destination": "MIA",
-    "departureTime": "2025-08-17T23:30:00",
-    "arrivalTime": "2025-08-18T10:00:00",
-    "durationMinutes": 510,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 380.00 },
-      { "class": "Business", "baseFare": 940.00 },
-      { "class": "FirstClass", "baseFare": 2120.00 }
-    ]
-  },
-  {
-    "flightNumber": "BW-612",
-    "provider": "BudgetWings",
-    "origin": "LAX",
-    "destination": "MIA",
-    "departureTime": "2025-08-16T15:45:00",
-    "arrivalTime": "2025-08-16T23:05:00",
-    "durationMinutes": 320,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 200.00 },
-      { "class": "Business", "baseFare": 560.00 },
-      { "class": "FirstClass", "baseFare": 1240.00 }
-    ]
-  }
+  { "flightNumber": "BW-410", "provider": "BudgetWings", "origin": "JFK", "destination": "EZE", "departureTime": "2026-06-11T18:25:00", "durationMinutes": 625, "cabinClasses": [ { "class": "Economy", "baseFare": 410.00 }, { "class": "Business", "baseFare": 980.00 }, { "class": "FirstClass", "baseFare": 2200.00 } ] },
+  { "flightNumber": "BW-410", "provider": "BudgetWings", "origin": "JFK", "destination": "EZE", "departureTime": "2026-06-15T18:25:00", "durationMinutes": 625, "cabinClasses": [ { "class": "Economy", "baseFare": 410.00 }, { "class": "Business", "baseFare": 980.00 }, { "class": "FirstClass", "baseFare": 2200.00 } ] },
+  { "flightNumber": "BW-410", "provider": "BudgetWings", "origin": "JFK", "destination": "EZE", "departureTime": "2026-06-24T18:25:00", "durationMinutes": 625, "cabinClasses": [ { "class": "Economy", "baseFare": 425.00 }, { "class": "Business", "baseFare": 1010.00 }, { "class": "FirstClass", "baseFare": 2260.00 } ] },
+  { "flightNumber": "BW-410", "provider": "BudgetWings", "origin": "JFK", "destination": "EZE", "departureTime": "2026-07-06T18:25:00", "durationMinutes": 625, "cabinClasses": [ { "class": "Economy", "baseFare": 440.00 }, { "class": "Business", "baseFare": 1040.00 }, { "class": "FirstClass", "baseFare": 2320.00 } ] },
+  { "flightNumber": "BW-411", "provider": "BudgetWings", "origin": "MIA", "destination": "AEP", "departureTime": "2026-06-13T20:00:00", "durationMinutes": 510, "cabinClasses": [ { "class": "Economy", "baseFare": 365.00 }, { "class": "Business", "baseFare": 910.00 }, { "class": "FirstClass", "baseFare": 2050.00 } ] },
+  { "flightNumber": "BW-411", "provider": "BudgetWings", "origin": "MIA", "destination": "AEP", "departureTime": "2026-06-27T20:00:00", "durationMinutes": 510, "cabinClasses": [ { "class": "Economy", "baseFare": 380.00 }, { "class": "Business", "baseFare": 940.00 }, { "class": "FirstClass", "baseFare": 2100.00 } ] },
+  { "flightNumber": "BW-412", "provider": "BudgetWings", "origin": "LAX", "destination": "EZE", "departureTime": "2026-06-16T07:30:00", "durationMinutes": 760, "cabinClasses": [ { "class": "Economy", "baseFare": 520.00 }, { "class": "Business", "baseFare": 1180.00 }, { "class": "FirstClass", "baseFare": 2500.00 } ] },
+  { "flightNumber": "BW-412", "provider": "BudgetWings", "origin": "LAX", "destination": "EZE", "departureTime": "2026-07-04T07:30:00", "durationMinutes": 760, "cabinClasses": [ { "class": "Economy", "baseFare": 540.00 }, { "class": "Business", "baseFare": 1220.00 }, { "class": "FirstClass", "baseFare": 2560.00 } ] },
+  { "flightNumber": "BW-520", "provider": "BudgetWings", "origin": "JFK", "destination": "LAX", "departureTime": "2026-06-11T06:15:00", "durationMinutes": 335, "cabinClasses": [ { "class": "Economy", "baseFare": 180.00 }, { "class": "Business", "baseFare": 520.00 }, { "class": "FirstClass", "baseFare": 1180.00 } ] },
+  { "flightNumber": "BW-520", "provider": "BudgetWings", "origin": "JFK", "destination": "LAX", "departureTime": "2026-06-13T06:15:00", "durationMinutes": 335, "cabinClasses": [ { "class": "Economy", "baseFare": 180.00 }, { "class": "Business", "baseFare": 520.00 }, { "class": "FirstClass", "baseFare": 1180.00 } ] },
+  { "flightNumber": "BW-520", "provider": "BudgetWings", "origin": "JFK", "destination": "LAX", "departureTime": "2026-06-21T06:15:00", "durationMinutes": 335, "cabinClasses": [ { "class": "Economy", "baseFare": 195.00 }, { "class": "Business", "baseFare": 550.00 }, { "class": "FirstClass", "baseFare": 1240.00 } ] },
+  { "flightNumber": "BW-521", "provider": "BudgetWings", "origin": "ATL", "destination": "JFK", "departureTime": "2026-06-12T12:40:00", "durationMinutes": 135, "cabinClasses": [ { "class": "Economy", "baseFare": 110.00 }, { "class": "Business", "baseFare": 320.00 }, { "class": "FirstClass", "baseFare": 690.00 } ] },
+  { "flightNumber": "BW-521", "provider": "BudgetWings", "origin": "ATL", "destination": "JFK", "departureTime": "2026-06-26T12:40:00", "durationMinutes": 135, "cabinClasses": [ { "class": "Economy", "baseFare": 120.00 }, { "class": "Business", "baseFare": 340.00 }, { "class": "FirstClass", "baseFare": 720.00 } ] },
+  { "flightNumber": "BW-522", "provider": "BudgetWings", "origin": "MIA", "destination": "ATL", "departureTime": "2026-06-14T17:10:00", "durationMinutes": 105, "cabinClasses": [ { "class": "Economy", "baseFare": 95.00 }, { "class": "Business", "baseFare": 290.00 }, { "class": "FirstClass", "baseFare": 640.00 } ] },
+  { "flightNumber": "BW-522", "provider": "BudgetWings", "origin": "MIA", "destination": "ATL", "departureTime": "2026-07-02T17:10:00", "durationMinutes": 105, "cabinClasses": [ { "class": "Economy", "baseFare": 105.00 }, { "class": "Business", "baseFare": 310.00 }, { "class": "FirstClass", "baseFare": 680.00 } ] },
+  { "flightNumber": "BW-610", "provider": "BudgetWings", "origin": "EZE", "destination": "AEP", "departureTime": "2026-06-12T10:05:00", "durationMinutes": 40, "cabinClasses": [ { "class": "Economy", "baseFare": 30.00 }, { "class": "Business", "baseFare": 150.00 }, { "class": "FirstClass", "baseFare": 360.00 } ] },
+  { "flightNumber": "BW-610", "provider": "BudgetWings", "origin": "EZE", "destination": "AEP", "departureTime": "2026-06-29T10:05:00", "durationMinutes": 40, "cabinClasses": [ { "class": "Economy", "baseFare": 35.00 }, { "class": "Business", "baseFare": 160.00 }, { "class": "FirstClass", "baseFare": 380.00 } ] },
+  { "flightNumber": "BW-611", "provider": "BudgetWings", "origin": "EZE", "destination": "MIA", "departureTime": "2026-06-18T23:30:00", "durationMinutes": 510, "cabinClasses": [ { "class": "Economy", "baseFare": 380.00 }, { "class": "Business", "baseFare": 940.00 }, { "class": "FirstClass", "baseFare": 2120.00 } ] },
+  { "flightNumber": "BW-611", "provider": "BudgetWings", "origin": "EZE", "destination": "MIA", "departureTime": "2026-07-07T23:30:00", "durationMinutes": 510, "cabinClasses": [ { "class": "Economy", "baseFare": 395.00 }, { "class": "Business", "baseFare": 970.00 }, { "class": "FirstClass", "baseFare": 2180.00 } ] },
+  { "flightNumber": "BW-612", "provider": "BudgetWings", "origin": "LAX", "destination": "MIA", "departureTime": "2026-06-16T15:45:00", "durationMinutes": 320, "cabinClasses": [ { "class": "Economy", "baseFare": 200.00 }, { "class": "Business", "baseFare": 560.00 }, { "class": "FirstClass", "baseFare": 1240.00 } ] },
+  { "flightNumber": "BW-612", "provider": "BudgetWings", "origin": "LAX", "destination": "MIA", "departureTime": "2026-07-03T15:45:00", "durationMinutes": 320, "cabinClasses": [ { "class": "Economy", "baseFare": 215.00 }, { "class": "Business", "baseFare": 590.00 }, { "class": "FirstClass", "baseFare": 1300.00 } ] }
 ]

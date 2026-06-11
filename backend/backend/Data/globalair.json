@@ -1,128 +1,25 @@
 [
-  {
-    "flightNumber": "GA-101",
-    "provider": "GlobalAir",
-    "origin": "JFK",
-    "destination": "EZE",
-    "departureTime": "2025-08-15T10:30:00",
-    "arrivalTime": "2025-08-16T06:45:00",
-    "durationMinutes": 615,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 480.00 },
-      { "class": "Business", "baseFare": 1200.00 },
-      { "class": "FirstClass", "baseFare": 2800.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-102",
-    "provider": "GlobalAir",
-    "origin": "MIA",
-    "destination": "EZE",
-    "departureTime": "2025-08-15T22:10:00",
-    "arrivalTime": "2025-08-16T08:55:00",
-    "durationMinutes": 525,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 430.00 },
-      { "class": "Business", "baseFare": 1100.00 },
-      { "class": "FirstClass", "baseFare": 2600.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-103",
-    "provider": "GlobalAir",
-    "origin": "ATL",
-    "destination": "AEP",
-    "departureTime": "2025-08-16T08:00:00",
-    "arrivalTime": "2025-08-16T19:20:00",
-    "durationMinutes": 620,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 510.00 },
-      { "class": "Business", "baseFare": 1320.00 },
-      { "class": "FirstClass", "baseFare": 2950.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-201",
-    "provider": "GlobalAir",
-    "origin": "JFK",
-    "destination": "LAX",
-    "departureTime": "2025-08-15T07:45:00",
-    "arrivalTime": "2025-08-15T11:10:00",
-    "durationMinutes": 325,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 220.00 },
-      { "class": "Business", "baseFare": 640.00 },
-      { "class": "FirstClass", "baseFare": 1480.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-202",
-    "provider": "GlobalAir",
-    "origin": "ATL",
-    "destination": "MIA",
-    "departureTime": "2025-08-15T13:20:00",
-    "arrivalTime": "2025-08-15T15:05:00",
-    "durationMinutes": 105,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 130.00 },
-      { "class": "Business", "baseFare": 380.00 },
-      { "class": "FirstClass", "baseFare": 820.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-203",
-    "provider": "GlobalAir",
-    "origin": "LAX",
-    "destination": "ATL",
-    "departureTime": "2025-08-15T16:30:00",
-    "arrivalTime": "2025-08-15T23:35:00",
-    "durationMinutes": 245,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 240.00 },
-      { "class": "Business", "baseFare": 690.00 },
-      { "class": "FirstClass", "baseFare": 1560.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-301",
-    "provider": "GlobalAir",
-    "origin": "AEP",
-    "destination": "EZE",
-    "departureTime": "2025-08-15T09:15:00",
-    "arrivalTime": "2025-08-15T09:55:00",
-    "durationMinutes": 40,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 75.00 },
-      { "class": "Business", "baseFare": 190.00 },
-      { "class": "FirstClass", "baseFare": 420.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-302",
-    "provider": "GlobalAir",
-    "origin": "EZE",
-    "destination": "JFK",
-    "departureTime": "2025-08-17T21:40:00",
-    "arrivalTime": "2025-08-18T08:05:00",
-    "durationMinutes": 625,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 495.00 },
-      { "class": "Business", "baseFare": 1250.00 },
-      { "class": "FirstClass", "baseFare": 2880.00 }
-    ]
-  },
-  {
-    "flightNumber": "GA-303",
-    "provider": "GlobalAir",
-    "origin": "MIA",
-    "destination": "LAX",
-    "departureTime": "2025-08-16T11:00:00",
-    "arrivalTime": "2025-08-16T14:25:00",
-    "durationMinutes": 325,
-    "cabinClasses": [
-      { "class": "Economy", "baseFare": 260.00 },
-      { "class": "Business", "baseFare": 720.00 },
-      { "class": "FirstClass", "baseFare": 1620.00 }
-    ]
-  }
+  { "flightNumber": "GA-101", "provider": "GlobalAir", "origin": "JFK", "destination": "EZE", "departureTime": "2026-06-11T10:30:00", "durationMinutes": 615, "cabinClasses": [ { "class": "Economy", "baseFare": 480.00 }, { "class": "Business", "baseFare": 1200.00 }, { "class": "FirstClass", "baseFare": 2800.00 } ] },
+  { "flightNumber": "GA-101", "provider": "GlobalAir", "origin": "JFK", "destination": "EZE", "departureTime": "2026-06-15T10:30:00", "durationMinutes": 615, "cabinClasses": [ { "class": "Economy", "baseFare": 480.00 }, { "class": "Business", "baseFare": 1200.00 }, { "class": "FirstClass", "baseFare": 2800.00 } ] },
+  { "flightNumber": "GA-101", "provider": "GlobalAir", "origin": "JFK", "destination": "EZE", "departureTime": "2026-06-22T10:30:00", "durationMinutes": 615, "cabinClasses": [ { "class": "Economy", "baseFare": 495.00 }, { "class": "Business", "baseFare": 1240.00 }, { "class": "FirstClass", "baseFare": 2850.00 } ] },
+  { "flightNumber": "GA-101", "provider": "GlobalAir", "origin": "JFK", "destination": "EZE", "departureTime": "2026-07-02T10:30:00", "durationMinutes": 615, "cabinClasses": [ { "class": "Economy", "baseFare": 510.00 }, { "class": "Business", "baseFare": 1260.00 }, { "class": "FirstClass", "baseFare": 2900.00 } ] },
+  { "flightNumber": "GA-102", "provider": "GlobalAir", "origin": "MIA", "destination": "EZE", "departureTime": "2026-06-12T22:10:00", "durationMinutes": 525, "cabinClasses": [ { "class": "Economy", "baseFare": 430.00 }, { "class": "Business", "baseFare": 1100.00 }, { "class": "FirstClass", "baseFare": 2600.00 } ] },
+  { "flightNumber": "GA-102", "provider": "GlobalAir", "origin": "MIA", "destination": "EZE", "departureTime": "2026-06-20T22:10:00", "durationMinutes": 525, "cabinClasses": [ { "class": "Economy", "baseFare": 445.00 }, { "class": "Business", "baseFare": 1130.00 }, { "class": "FirstClass", "baseFare": 2650.00 } ] },
+  { "flightNumber": "GA-102", "provider": "GlobalAir", "origin": "MIA", "destination": "EZE", "departureTime": "2026-07-05T22:10:00", "durationMinutes": 525, "cabinClasses": [ { "class": "Economy", "baseFare": 460.00 }, { "class": "Business", "baseFare": 1160.00 }, { "class": "FirstClass", "baseFare": 2700.00 } ] },
+  { "flightNumber": "GA-103", "provider": "GlobalAir", "origin": "ATL", "destination": "AEP", "departureTime": "2026-06-14T08:00:00", "durationMinutes": 620, "cabinClasses": [ { "class": "Economy", "baseFare": 510.00 }, { "class": "Business", "baseFare": 1320.00 }, { "class": "FirstClass", "baseFare": 2950.00 } ] },
+  { "flightNumber": "GA-103", "provider": "GlobalAir", "origin": "ATL", "destination": "AEP", "departureTime": "2026-06-28T08:00:00", "durationMinutes": 620, "cabinClasses": [ { "class": "Economy", "baseFare": 525.00 }, { "class": "Business", "baseFare": 1350.00 }, { "class": "FirstClass", "baseFare": 3000.00 } ] },
+  { "flightNumber": "GA-201", "provider": "GlobalAir", "origin": "JFK", "destination": "LAX", "departureTime": "2026-06-11T07:45:00", "durationMinutes": 325, "cabinClasses": [ { "class": "Economy", "baseFare": 220.00 }, { "class": "Business", "baseFare": 640.00 }, { "class": "FirstClass", "baseFare": 1480.00 } ] },
+  { "flightNumber": "GA-201", "provider": "GlobalAir", "origin": "JFK", "destination": "LAX", "departureTime": "2026-06-13T07:45:00", "durationMinutes": 325, "cabinClasses": [ { "class": "Economy", "baseFare": 220.00 }, { "class": "Business", "baseFare": 640.00 }, { "class": "FirstClass", "baseFare": 1480.00 } ] },
+  { "flightNumber": "GA-201", "provider": "GlobalAir", "origin": "JFK", "destination": "LAX", "departureTime": "2026-06-19T07:45:00", "durationMinutes": 325, "cabinClasses": [ { "class": "Economy", "baseFare": 235.00 }, { "class": "Business", "baseFare": 670.00 }, { "class": "FirstClass", "baseFare": 1520.00 } ] },
+  { "flightNumber": "GA-201", "provider": "GlobalAir", "origin": "JFK", "destination": "LAX", "departureTime": "2026-07-01T07:45:00", "durationMinutes": 325, "cabinClasses": [ { "class": "Economy", "baseFare": 245.00 }, { "class": "Business", "baseFare": 690.00 }, { "class": "FirstClass", "baseFare": 1560.00 } ] },
+  { "flightNumber": "GA-202", "provider": "GlobalAir", "origin": "ATL", "destination": "MIA", "departureTime": "2026-06-12T13:20:00", "durationMinutes": 105, "cabinClasses": [ { "class": "Economy", "baseFare": 130.00 }, { "class": "Business", "baseFare": 380.00 }, { "class": "FirstClass", "baseFare": 820.00 } ] },
+  { "flightNumber": "GA-202", "provider": "GlobalAir", "origin": "ATL", "destination": "MIA", "departureTime": "2026-06-18T13:20:00", "durationMinutes": 105, "cabinClasses": [ { "class": "Economy", "baseFare": 140.00 }, { "class": "Business", "baseFare": 400.00 }, { "class": "FirstClass", "baseFare": 860.00 } ] },
+  { "flightNumber": "GA-203", "provider": "GlobalAir", "origin": "LAX", "destination": "ATL", "departureTime": "2026-06-15T16:30:00", "durationMinutes": 245, "cabinClasses": [ { "class": "Economy", "baseFare": 240.00 }, { "class": "Business", "baseFare": 690.00 }, { "class": "FirstClass", "baseFare": 1560.00 } ] },
+  { "flightNumber": "GA-203", "provider": "GlobalAir", "origin": "LAX", "destination": "ATL", "departureTime": "2026-07-03T16:30:00", "durationMinutes": 245, "cabinClasses": [ { "class": "Economy", "baseFare": 255.00 }, { "class": "Business", "baseFare": 720.00 }, { "class": "FirstClass", "baseFare": 1620.00 } ] },
+  { "flightNumber": "GA-301", "provider": "GlobalAir", "origin": "AEP", "destination": "EZE", "departureTime": "2026-06-11T09:15:00", "durationMinutes": 40, "cabinClasses": [ { "class": "Economy", "baseFare": 75.00 }, { "class": "Business", "baseFare": 190.00 }, { "class": "FirstClass", "baseFare": 420.00 } ] },
+  { "flightNumber": "GA-301", "provider": "GlobalAir", "origin": "AEP", "destination": "EZE", "departureTime": "2026-06-25T09:15:00", "durationMinutes": 40, "cabinClasses": [ { "class": "Economy", "baseFare": 80.00 }, { "class": "Business", "baseFare": 200.00 }, { "class": "FirstClass", "baseFare": 440.00 } ] },
+  { "flightNumber": "GA-302", "provider": "GlobalAir", "origin": "EZE", "destination": "JFK", "departureTime": "2026-06-17T21:40:00", "durationMinutes": 625, "cabinClasses": [ { "class": "Economy", "baseFare": 495.00 }, { "class": "Business", "baseFare": 1250.00 }, { "class": "FirstClass", "baseFare": 2880.00 } ] },
+  { "flightNumber": "GA-302", "provider": "GlobalAir", "origin": "EZE", "destination": "JFK", "departureTime": "2026-07-08T21:40:00", "durationMinutes": 625, "cabinClasses": [ { "class": "Economy", "baseFare": 515.00 }, { "class": "Business", "baseFare": 1290.00 }, { "class": "FirstClass", "baseFare": 2950.00 } ] },
+  { "flightNumber": "GA-303", "provider": "GlobalAir", "origin": "MIA", "destination": "LAX", "departureTime": "2026-06-16T11:00:00", "durationMinutes": 325, "cabinClasses": [ { "class": "Economy", "baseFare": 260.00 }, { "class": "Business", "baseFare": 720.00 }, { "class": "FirstClass", "baseFare": 1620.00 } ] },
+  { "flightNumber": "GA-303", "provider": "GlobalAir", "origin": "MIA", "destination": "LAX", "departureTime": "2026-07-03T11:00:00", "durationMinutes": 325, "cabinClasses": [ { "class": "Economy", "baseFare": 275.00 }, { "class": "Business", "baseFare": 750.00 }, { "class": "FirstClass", "baseFare": 1680.00 } ] }
 ]
